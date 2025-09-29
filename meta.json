@@ -1,35 +1,38 @@
 {
-    "workflow_environment":"pyiron",
-    "title": "pyiron workflow template",
+    "workflow_environment":"pyiron_workflow",
+    "title": "Bulk solution energy of a solute (pyiron_workflow)",
     "authors": [
-        "author1 <email_address>",
-        "author2 <email_address>"
+        "Han Mai <h.mai@mpie.de>"
     ],
-    "description": "description of what the workflow does",
-    "release": "0.0.1",
+    "description": "Compute the bulk solution energy of a substitutional solute in a host using arbitrary atomistics engines via pyiron_workflow; demonstrated here with LAMMPS.",
+    "release": "0.1.0",
     "keywords": [
         "workflow",
-        "template",
-        "keyword1",
-        "keyword2"
+        "pyiron_workflow",
+        "LAMMPS",
+        "molecular dynamics",
+        "bulk solution energy",
+        "solute",
+        "defect",
+        "substitutional",
+        "atomistics"
     ],
     "categories":[
-        "category1, e.g., continuum/atomistics/experimental",
-        "catergory2, e.g., continuum/atomistics/experimental"
+        "atomistics"
     ],
     "steps/codes":[
-        "step1, e.g., calculation of elastic modulus",
-        "code1, e.g., LAMMPS",
-        "step2, e.g., macroscopic response",
-        "code2, e.g., DAMASK"
+        "Prepare relaxed host bulk structure (engine-agnostic)",
+        "Create supercell and substitute solute atom",
+        "Run energy calculations for host and solute-containing cells (e.g., LAMMPS)",
+        "Extract energies and compute solution energy"
     ],
-    "license": {
-        "softwar1": "license1",
-        "software2": "license2"
+    "licenses": {
+        "pyiron_workflow": "BSD-3-Clause",
+        "LAMMPS": "GPL-2.0-or-later"
     },
-    "publication": [
-        "publication1",
-        "publication2"
+    "publications": [
+        "Janssen, J., Surendralal, S., Lysogorskiy, Y., Todorova, M., Hickel, T., Drautz, R. and Neugebauer, J., 2019. pyiron: An integrated development environment for computational materials science. Computational Materials Science, 163, pp.24-36.",
+        "Plimpton, S., 1995. Fast Parallel Algorithms for Short-Range Molecular Dynamics. Journal of Computational Physics, 117(1), 1-19."
     ],
     "logo" : "logo_dark.png"
 }

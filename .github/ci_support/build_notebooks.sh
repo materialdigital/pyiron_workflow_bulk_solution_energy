@@ -3,14 +3,6 @@ set -e  # Exit on any error
 
 echo "Starting notebook build process..."
 
-# pyiron config 
-echo "Setting up pyiron configuration..."
-python .github/ci_support/pyironconfig.py
-
-# import dataset
-echo "Importing datasets..."
-bash .github/ci_support/import_dataset.sh
-
 # register jupyter kernel
 echo "Registering Jupyter kernel..."
 python -m ipykernel install --user --name python3 --display-name "Python 3"

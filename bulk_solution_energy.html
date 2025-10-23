@@ -371,19 +371,13 @@ document.write(`
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_lammps.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">LammpsEngine</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.dataclass_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalcInputMinimize</span><span class="p">,</span> <span class="n">CalcInputStatic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.dataclass_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalcInputMinimize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.bulk</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimise_cubic_lattice_parameter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.structure_manipulator.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_supercell_with_min_dimensions</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.gb.gb_study</span><span class="w"> </span><span class="kn">import</span> <span class="n">pure_gb_study</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.gb.dataclass_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">CleaveGBStructureInput</span><span class="p">,</span> <span class="n">PlotCleaveInput</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.featurisers</span><span class="w"> </span><span class="kn">import</span> <span class="n">distanceMatrixSiteFeaturiser</span><span class="p">,</span> <span class="n">voronoiSiteFeaturiser</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.gb.gb_code.searcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gb_code_df</span><span class="p">,</span> <span class="n">get_gb_code_df_with_structures</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.structure_manipulator.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">substitutional_swap_one_site</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyiron_workflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pwf</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ase.build</span><span class="w"> </span><span class="kn">import</span> <span class="n">bulk</span>
 
 <span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -391,20 +385,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">CalcInputMinimize</span><span class="p">()</span>
-<span class="n">inp</span><span class="o">.</span><span class="n">relax_cell</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">Engine_eam</span> <span class="o">=</span> <span class="n">LammpsEngine</span><span class="p">(</span><span class="n">EngineInput</span> <span class="o">=</span> <span class="n">inp</span><span class="p">)</span>
-
-<span class="n">Engine_eam</span><span class="o">.</span><span class="n">working_directory</span> <span class="o">=</span> <span class="s2">&quot;solution_energy&quot;</span>
-<span class="n">Engine_eam</span><span class="o">.</span><span class="n">lammps_log_filepath</span> <span class="o">=</span> <span class="s2">&quot;minimize.log&quot;</span>
-<span class="c1"># Adjust this line to match your LAMMPS installation</span>
-<span class="c1"># If you are using conda-lammps or a LAMMPS binary on your system, you can use directly:</span>
-<span class="n">Engine_eam</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;lmp -in in.lmp -log minimize.log&quot;</span>
-<span class="n">Engine_eam</span><span class="o">.</span><span class="n">input_script_pair_style</span> <span class="o">=</span> <span class="s2">&quot;eam/fs&quot;</span>
-<span class="n">Engine_eam</span><span class="o">.</span><span class="n">path_to_model</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/Al-Fe.eam.fs&quot;</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
 </pre></div>
 </div>
 </div>
@@ -413,7 +396,21 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Fe_bulk</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s2">&quot;Fe&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">2.828</span><span class="p">,</span> <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+<span class="n">inp</span> <span class="o">=</span> <span class="n">CalcInputMinimize</span><span class="p">()</span>
+<span class="n">inp</span><span class="o">.</span><span class="n">relax_cell</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">Engine_eam</span> <span class="o">=</span> <span class="n">LammpsEngine</span><span class="p">(</span><span class="n">EngineInput</span> <span class="o">=</span> <span class="n">inp</span><span class="p">)</span>
+<span class="n">Engine_eam</span><span class="o">.</span><span class="n">working_directory</span> <span class="o">=</span> <span class="s2">&quot;solution_energy&quot;</span>
+<span class="n">Engine_eam</span><span class="o">.</span><span class="n">lammps_log_filepath</span> <span class="o">=</span> <span class="s2">&quot;minimize.log&quot;</span>
+<span class="c1"># Adjust this line to match your LAMMPS installation</span>
+<span class="c1"># If you are using conda-lammps or a LAMMPS binary on your system, you can use directly:</span>
+<span class="n">Engine_eam</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;lmp -in in.lmp -log minimize.log&quot;</span>
+<span class="n">Engine_eam</span><span class="o">.</span><span class="n">input_script_pair_style</span> <span class="o">=</span> <span class="s2">&quot;eam/fs&quot;</span>
+<span class="n">Engine_eam</span><span class="o">.</span><span class="n">path_to_model</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/Al-Fe.eam.fs&quot;</span>
+
 <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">Engine_eam</span><span class="o">.</span><span class="n">working_directory</span><span class="p">,</span> <span class="n">delete_existing_savefiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+
 <span class="n">wf</span><span class="o">.</span><span class="n">opt_cubic_cell</span> <span class="o">=</span> <span class="n">optimise_cubic_lattice_parameter</span><span class="p">(</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">Fe_bulk</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Fe&quot;</span><span class="p">,</span>
@@ -473,8 +470,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/root/miniconda3/envs/pyiron_pypi_workflow_lammps/lib/python3.12/site-packages/pyiron_workflow_lammps/engine.py:113: RuntimeWarning: &#39;mode&#39; already set to &#39;minimize&#39; and also implied by EngineInput; no change.
-  warnings.warn(
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-10-23 16:21:59,483 - pyiron_log - WARNING - Directory &#39;solution_energy/strain_000&#39; already exists. Existing files may be overwritten.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>current mode  minimize
@@ -518,7 +514,7 @@ current mode  minimize
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution energy is -0.369 eV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution energy of Al in Fe BCC is -0.369 eV
 The total energy of the bulk (128 Fe) structure is -1003.246 eV
 The total energy of the solute (127 Fe + 1 Al) structure is -1003.615 eV
 </pre></div>
